@@ -118,7 +118,7 @@ io.on("connection", async (socket)=> {
 //Recibimos los mensajes desde el socketClient de "chats.js".
      
     //traigo todos los chat
-    const msg = await chatsServiceMongo.getMessage()
+    const msg = await ChatService.getMessage()
     //emito los caht 
     socket.emit("chatHistory", msg)
     //recibo mensaje de cada usuario desde el cliente
