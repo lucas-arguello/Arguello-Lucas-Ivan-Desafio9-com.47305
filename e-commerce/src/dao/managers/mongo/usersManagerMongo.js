@@ -20,7 +20,7 @@ export class UsersManagerMongo {
         }
         
     }
-    async getUser(email){
+    async getUserByEmail(email){
         try {
 
             const user = await this.model.findOne({email})

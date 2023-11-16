@@ -24,7 +24,7 @@ export const initializePassport = () => {
 
             const {first_name, last_name, age} = req.body
             try {
-                const user = await UsersSessionsService.getUser(username)
+                const user = await UsersSessionsService.getUserByEmail(username)
                 console.log('Usuario local', user)
                 
                 if(user){//null: que no hubo error, false: ya existe, un mensaje
@@ -61,7 +61,7 @@ export const initializePassport = () => {
         async (username, password, done) => {
             try {
 
-                const user = await UsersSessionsService.getUser(username);
+                const user = await UsersSessionsService.getUserByEmail(username);
                 //al revez del registro
                 if (!user) {
                 //el usuario no esta registrado
@@ -89,7 +89,7 @@ export const initializePassport = () => {
         async (accessToken, refreshToken, profile, done) => {
             try {
                 console.log('Perfil', profile)
-                const user = await UsersSessionsService.getUser(profile._json.email)
+                const user = await UsersSessionsService.getUserByEmail(profile._json.email)
                 if(user){
                     return done(null, user)
                 }
@@ -120,7 +120,7 @@ export const initializePassport = () => {
     //cuando el usuario haga otra peticion(login) se consulta la info, se trae y se guarda en req.user
     passport.deserializeUser(async(id, done)=>{//recibo el id guardado en la sesion
         //verifico si el usuario existe
-        const user = await usersServiceMongo.getUserById(id);
+        const user = await UsersSessionsService.getUserById(id);
         //const user = await usersModel.findById(id)
         done(null, user)//queda guardado la info del ususario en una variable req.user
     })
