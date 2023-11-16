@@ -118,16 +118,16 @@ io.on("connection", async (socket)=> {
 //Recibimos los mensajes desde el socketClient de "chats.js".
      
     //traigo todos los chat
-    const msg = await ChatService.getMessage()
+    const msg = await ChatService.getMessages()
     //emito los caht 
     socket.emit("chatHistory", msg)
     //recibo mensaje de cada usuario desde el cliente
     socket.on('msgChat', async (messageClient) => {//recibo el mensaje del front
         try {
             //creo los chat en la base de datos
-            await ChatService.addMessage(messageClient);
+            await ChatService.createMessage(messageClient);
             //obtengo y actualizo los mensajes
-            const msg = await ChatService.getMessage();
+            const msg = await ChatService.getMessages();
             //replico y envio el mensaje a todos los usuarios
             io.emit('chatHistory', msg);//envio el mensaje
             
@@ -139,6 +139,6 @@ io.on("connection", async (socket)=> {
     
 
 });
-
+//
 
 

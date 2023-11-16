@@ -1,15 +1,12 @@
-import { usersDao } from "../dao/index.js";
+import { chatsDao } from "../dao/index.js";
 
 export class ChatService {
 
-    static createUsers(){
-        return usersDao.createUsers()
+    static getMessages(){
+        return chatsDao.getMessages()
     }
-    static getUserByEmail(email){
-        return usersDao.getUserByEmail(email)
-    }
-    static getUserById(id){
-        return usersDao.getUserById(id)
+    static createMessage(messageInfo){
+        return chatsDao.createMessage(messageInfo)
     }
 }
 

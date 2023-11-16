@@ -6,7 +6,7 @@ export class ChatsManagerMongo{
                     this.model = chatsModel;
                 };
 
-                async addMessage(messageInfo){
+                async createMessage(messageInfo){
                     try {
 
                         const message = await this.model.create(messageInfo);
@@ -19,7 +19,7 @@ export class ChatsManagerMongo{
                     };
                 };
 
-                async getMessage() {
+                async getMessages() {
                     try {
                         const messagesList = await this.model.find();
                        
